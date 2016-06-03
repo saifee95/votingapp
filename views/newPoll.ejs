@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/new.css'/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+  <body>
+    <nav class="navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" style="font-size:25px;color:white">VoteIt</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/Polls">Public Polls</a></li>
+          <li><a href="/myPolls">MyPolls</a></li>
+          <li><a href="/">Log Out</a></li>
+
+        </ul>
+      </div>
+    </nav><br>
+
+    <h1>Create your Polls Here</h1>
+
+    <div class = "sign">
+      <form role="form" method="post" id = "f">
+      <div id = 'd' class = 'table'>
+          <div class="form-group">
+            <label for="question">Question</label>
+            <input type="text" class="form-control" id="que" name="question">
+          </div>
+
+          <div class="form-group" id = '1'>
+            <label for="option1">Option1</label>
+            <input type="text" class="form-control" id="opt1" name="option1">
+          </div>
+
+          <div class="form-group" id = '2'>
+            <label for="option2">Option2</label>
+            <input type="text" class="form-control" id="opt2" name="option2">
+          </div>
+      </div><br>
+          <input type="submit" class="btn btn-success" value="Submit">
+          <input type="button" class="btn" value="Add Option" id = "newop">
+          <input type="button" class="btn" value="Remove Option" id = "rmop">
+
+      </form>
+    </div>
+  </body>
+</html>
+
+
+<script>
+  
+$(document).ready(function(){
+
+  var op = 2;
+
+  $('#newop').click(function(){
+
+      op += 1;
+      $('#d').append('<div class="form-group" id = "'+op+'"><label for="option'+ op +'">Option' + op +'</label><input type="text" class="form-control" id="opt' + op +'" name="option' + op +'"></div>');
+        console.log(op);
+  });
+
+  $('#rmop').click(function(){
+
+    if(op >= 3){
+      $('#'+op+'').remove();
+      op -= 1;
+      console.log(op);
+    }
+    else{
+      alert("You need atleat two options to create a poll");
+    }
+
+  });
+
+});
+
+</script>

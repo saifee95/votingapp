@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/new.css'/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+  <body>
+    <nav class="navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" style="font-size:25px;color:white">VoteIt</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/newPoll">New Poll</a></li>
+          <li><a href="/myPolls">MyPolls</a></li>
+          <li><a href="/">Log Out</a></li>
+
+        </ul>
+      </div>
+    </nav><br>
+
+    <h1>Polls created by all the users</h1>
+    <h2>Click on a poll to view it specifically</h2>
+
+<div class="container con">
+<div class="row">
+<div class="col-md-6 col-md-offset-3" style = "background:transparent">
+<div class="panel" style = "background:transparent;border:solid black">
+<table class="table" style = "background:transparent">
+<tbody>
+  <% if(data) { %>
+    <% for(var i=0; i < data.length; i++) { %>
+    <tr style="border:black">
+      <form method="post" name="form">
+        <td><a href='myPolls/<%= data[i]._id %>' style = "color:black;font-size:18px"><%= data[i].question %></a></td>
+        <td><p style = "color:black;font-size:15px">Created by: <%= data[i].author %></p></td>
+      </form>
+    </tr>
+    <% } %>
+  <% } %>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+  </body>
+</html>

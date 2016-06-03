@@ -1,0 +1,47 @@
+body {
+
+	background-image: url('../images/mountain.jpg');
+  	font: 'monaco';
+  	color: white;
+}
+
+a {
+  	color: white;
+  	/*font-size: 35px;*/
+}
+
+p{
+	font-size: 20px;	
+
+}
+
+.navbar{
+
+	background:black;
+	font-size: 17px;
+}
+
+li > a{
+	color: white;
+}
+
+.main{
+
+	position: relative;
+	top: 50%;
+	margin: auto;
+	width: 750px;
+	height: 200px;
+	background:transparent;
+	transform: translateY(+50%);
+	text-align: center;
+	color: black;
+	border: solid black;
+	border-radius: 15px;
+}
+
+.btn{
+
+	background-color: black;
+	color: white;
+}

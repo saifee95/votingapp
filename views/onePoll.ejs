@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<script type="text/javascript"></script>
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.3/Chart.js"></script>
+  <link rel='stylesheet' href='/stylesheets/new.css'/>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+
+<script>
+
+var mydata = <%- JSON.stringify(data) %>;
+// console.log(mydata);
+$(document).ready(function(){
+
+  var ctx = $("#myChart").get(0).getContext("2d");;
+  ctx.canvas.width = 200;
+  ctx.canvas.height = 200;
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: mydata.options,
+        datasets: [{
+            label: '# of Votes',
+            data: mydata.votes,
+            backgroundColor : 'rgb(255,145,0)',
+            scaleFontColor:'rgb(0,0,0)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive:true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
+});
+</script>
+
+<body>
+    <nav class="navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" style="font-size:25px;color:white">VoteIt</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/Polls">Public Polls</a></li>
+          <li><a href="/newPoll">New Poll</a></li>
+          <li><a href="/myPolls">MyPolls</a></li>
+          <li><a href="/">Log Out</a></li>
+
+        </ul>
+      </div>
+    </nav><br>
+
+    <p>Click on any of the options to vote for that option</p><br><br>
+
+    <div class="container">
+    <div class="row">
+    <div class="col-md-6 col-md-offset-3" style = "background:transparent">
+    <div class="panel" style = "background:transparent;border:solid black">
+    <table class="table" style = "background:transparent">
+    <tbody>
+      <% if(data) { %>
+        <tr style="border:black"><td><p style = "color:black;font-size:18px"><%= data.question %></p></td></tr>
+        <% for(var i=0; i < data.options.length; i++) { %>
+          <tr style="border:black">
+          <form method="post" name="form">
+          <td><a href='<%= data._id %>/votedon/<%= i %>' style = "color:black;font-size:18px"><%= data.options[i] %></a></td>
+          </form>
+          </tr>          
+        <% } %>
+      <% } %>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="add">
+
+      <form method = "post" name = "form2" action="/add/<%= data._id %>">
+          <input type="text" id="opt2" name="option">
+          <input type="submit" class="btn btn-success" value="Add Option">
+      </form>
+    </div><br><br><br><br>
+
+    <div class = "graph">
+      <canvas id="myChart"></canvas>
+    </div>
+  </body>
+</html>
+
